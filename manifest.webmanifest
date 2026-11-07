@@ -1,0 +1,10 @@
+{
+  "name": "ATHENA GLOW UP",
+  "short_name": "ATHENA GLOW",
+  "lang": "fa",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fffafb",
+  "theme_color": "#fff7fa",
+  "description": "برنامه ۳۰ روزه گلوآپ آتنا"
+}

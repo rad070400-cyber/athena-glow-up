@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fff7fa">
+<meta name="description" content="ATHENA GLOW UP - برنامه ۳۰ روزه مراقبت و نظم شخصی">
+<link rel="manifest" href="manifest.webmanifest">
+<title>ATHENA GLOW UP</title>
+<style>
+:root{--pink:#e99ab7;--deep:#c96f94;--pale:#fff1f6;--ink:#493943;--muted:#947f89;--line:#f2dce5;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:#fffafb;color:var(--ink);font-family:Tahoma,Arial,sans-serif}
+header{padding:28px 20px 18px;background:linear-gradient(135deg,#fff4f8,#fff);border-bottom:1px solid var(--line)}
+.wrap{max-width:760px;margin:auto;padding:0 16px}
+.brand{font-size:12px;letter-spacing:2px;color:var(--deep);font-weight:bold}
+h1{font-size:25px;margin:8px 0 5px;letter-spacing:.4px}header p{margin:0;color:var(--muted);font-size:13px}
+main{padding:18px 0 40px}.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:16px;margin:0 0 14px;box-shadow:0 5px 20px #e7b5c51a}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.small{font-size:12px;color:var(--muted)}
+.progress{height:9px;background:#f8e8ee;border-radius:20px;overflow:hidden;margin:12px 0 5px}.bar{height:100%;background:linear-gradient(90deg,#f3b7cb,#d77f9f);width:0%;transition:width .2s}
+.tabs{display:flex;gap:8px;overflow:auto;padding:2px 0 12px}.tab,button{border:1px solid var(--line);background:white;color:var(--ink);border-radius:13px;padding:10px 13px;font:inherit;font-size:13px;white-space:nowrap;cursor:pointer}
+.tab.active,button.primary{background:var(--pale);border-color:#edc0d0;color:#a94f76;font-weight:bold}
+h2{font-size:17px;margin:0 0 12px}.task{display:flex;align-items:flex-start;gap:10px;padding:11px 2px;border-bottom:1px solid #f8edf1;font-size:13px;line-height:1.7}.task:last-child{border:0}
+input[type=checkbox]{accent-color:#d77f9f;width:18px;height:18px;margin-top:2px;flex:none}
+.task.done span{text-decoration:line-through;color:#aa9aa2}
+.daygrid{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}.day{padding:10px 2px;border-radius:12px;text-align:center;font-size:12px;border:1px solid var(--line);background:#fff}.day.selected{background:var(--pale);border-color:var(--pink);color:#a94f76;font-weight:bold}.day.finished{background:#f8edf1}
+.routine{display:grid;grid-template-columns:1fr 1fr;gap:10px}.routine .panel{margin:0;padding:13px}.routine h3{font-size:14px;margin:0 0 8px;color:#b85f83}
+footer{text-align:center;color:#b39ca7;font-size:11px;padding:10px}
+@media(min-width:600px){.daygrid{grid-template-columns:repeat(10,1fr)}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="brand">✿ YOUR PERSONAL GLOW-UP SPACE</div>
+<h1>ATHENA GLOW UP</h1>
+<p>۳۰ روز مراقبت از خود، نظم و حال خوب 🌷</p>
+</div></header>
+<main class="wrap">
+<section class="panel">
+<div class="row"><strong>پیشرفت کل چالش</strong><strong id="percent">۰٪</strong></div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<div class="small" id="count">۰ کار از ۰ کار انجام شده</div>
+</section>
+<section class="panel">
+<div class="row"><h2>تقویم ۳۰ روزه</h2><span class="small">یک روز را انتخاب کن</span></div>
+<div class="daygrid" id="days"></div>
+</section>
+<section class="panel">
+<div class="row"><h2 id="dayTitle">روز ۱</h2><span class="small" id="dayCount"></span></div>
+<div class="tabs" id="categories"></div>
+<div id="checklist"></div>
+</section>
+<h2 style="margin:20px 4px 12px">روتین‌های روزانه</h2>
+<div class="routine">
+<section class="panel"><h3>☀️ روتین صبح</h3><div id="morning"></div></section>
+<section class="panel"><h3>🌙 روتین شب</h3><div id="night"></div></section>
+</div>
+<section class="panel" style="margin-top:14px">
+<div class="row"><strong>یادآوری مهربانانه</strong><span>♡</span></div>
+<p class="small" style="line-height:1.9;margin-bottom:0">لازم نیست همه‌ی کارها را هر روز کامل انجام بدهی. این برنامه برای مراقبت و حال خوب توست، نه سخت‌گیری. اگر یک روز جا ماند، فردا دوباره ادامه بده.</p>
+</section>
+<footer>ساخته‌شده با عشق برای ATHENA · پیشرفت‌ها روی همین دستگاه ذخیره می‌شوند.</footer>
+</main>
+<script>
+const categories = {
+"پوست و صورت":["شستن ملایم صورت صبح","مرطوب‌کننده مناسب پوست","ضدآفتاب در طول روز","شستن صورت شب","بالم لب در صورت نیاز","تمیز نگه‌داشتن حوله صورت","تمیزکردن صفحه گوشی","نکندن جوش‌ها"],
+"مو و بهداشت":["شانه‌کردن موها","تمیز نگه‌داشتن برس مو","شستن مو در صورت نیاز","نرم‌کننده در صورت نیاز","مسواک صبح","مسواک شب","شستن دست‌ها","لباس تمیز و راحت","مرتب‌کردن ناخن‌ها"],
+"استایل و نظم":["انتخاب لباس فردا","هماهنگ‌کردن رنگ لباس‌ها","مرتب‌کردن کیف","مرتب‌کردن میز یا کشو","تمیزکردن کفش در صورت نیاز","آماده‌کردن وسایل مدرسه","مرتب‌کردن اکسسوری‌ها"],
+"تحرک و نشاط":["پیاده‌روی یا بازی فعال","کشش ملایم بدن","استراحت از نشستن طولانی","رقص یا فعالیت دلخواه","کمی وقت در هوای آزاد"],
+"درس و برنامه":["نوشتن برنامه امروز","انجام تکالیف","مرور درس‌های امروز","آماده‌کردن کیف","مرتب‌کردن میز مطالعه","خواندن چند صفحه کتاب","بررسی برنامه فردا"],
+"تغذیه و خواب":["خوردن صبحانه","خوردن وعده‌های غذایی منظم","خوردن میوه یا سبزی","نوشیدن آب در طول روز","میان‌وعده مناسب","کم‌کردن صفحه‌نمایش پیش از خواب","خواب کافی"],
+"اعتمادبه‌نفس":["نوشتن یک ویژگی مثبت خودم","مقایسه نکردن خودم با دیگران","انجام سرگرمی موردعلاقه","مهربانی با خودم","صحبت‌کردن با اعتمادبه‌نفس","نوشتن اتفاق خوب امروز","وقت‌گذراندن با خانواده یا دوست"]
+};
+const morning=["مرتب‌کردن تخت","شستن صورت و مرطوب‌کننده","مسواک‌زدن","شانه‌کردن موها","خوردن صبحانه","آماده‌کردن کیف و لباس","ضدآفتاب در روز"];
+const night=["آماده‌کردن لباس فردا","مرتب‌کردن وسایل","شستن صورت","مرطوب‌کننده در صورت نیاز","مسواک‌زدن","آماده‌کردن کیف مدرسه","کنارگذاشتن گوشی و خواب به‌موقع"];
+const key="athenaGlowUp_v1";
+let state=JSON.parse(localStorage.getItem(key)||'{"checks":{},"morning":{},"night":{},"day":1}');
+let day=state.day||1, category=Object.keys(categories)[0];
+const fa=n=>new Intl.NumberFormat('fa-IR').format(n);
+function save(){state.day=day;localStorage.setItem(key,JSON.stringify(state));render()}
+function taskHTML(list,prefix){return list.map((x,i)=>{let id=prefix+i,done=!!state[prefix][id];return `<label class="task ${done?'done':''}"><input type="checkbox" data-prefix="${prefix}" data-id="${id}" ${done?'checked':''}><span>${x}</span></label>`}).join("")}
+function render(){
+ document.getElementById("days").innerHTML=Array.from({length:30},(_,i)=>{let d=i+1,keys=Object.keys(state.checks).filter(k=>k.startsWith(d+"|"));let finished=keys.length>0&&keys.every(k=>state.checks[k]);return `<button class="day ${day===d?'selected':''} ${finished?'finished':''}" data-day="${d}">${fa(d)}</button>`}).join("");
+ document.getElementById("dayTitle").textContent="روز "+fa(day);
+ document.getElementById("categories").innerHTML=Object.keys(categories).map(c=>`<button class="tab ${category===c?'active':''}" data-cat="${c}">${c}</button>`).join("");
+ let list=categories[category];
+ document.getElementById("checklist").innerHTML=list.map((x,i)=>{let id=day+"|"+category+"|"+i,done=!!state.checks[id];return `<label class="task ${done?'done':''}"><input type="checkbox" data-check="${id}" ${done?'checked':''}><span>${x}</span></label>`}).join("");
+ let n=Object.keys(state.checks).filter(k=>k.startsWith(day+"|")&&state.checks[k]).length;
+ let total=Object.values(categories).reduce((a,b)=>a+b.length,0)*30;
+ let completed=Object.values(state.checks).filter(Boolean).length;
+ document.getElementById("dayCount").textContent=fa(n)+" کار انجام‌شده";
+ document.getElementById("morning").innerHTML=taskHTML(morning,"morning");
+ document.getElementById("night").innerHTML=taskHTML(night,"night");
+ document.getElementById("percent").textContent=fa(Math.round(completed/total*100))+"٪";
+ document.getElementById("bar").style.width=(completed/total*100)+"%";
+ document.getElementById("count").textContent=fa(completed)+" کار از "+fa(total)+" کار اصلی انجام شده";
+}
+document.addEventListener("change",e=>{
+ if(e.target.dataset.check){state.checks[e.target.dataset.check]=e.target.checked;save()}
+ if(e.target.dataset.prefix){state[e.target.dataset.prefix][e.target.dataset.id]=e.target.checked;save()}
+});
+document.addEventListener("click",e=>{
+ let d=e.target.closest("[data-day]");if(d){day=Number(d.dataset.day);save()}
+ let c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;render()}
+});
+render();
+if("serviceWorker" in navigator && location.protocol.startsWith("http")) navigator.serviceWorker.register("./sw.js").catch(()=>{});
+</script>
+</body></html>
